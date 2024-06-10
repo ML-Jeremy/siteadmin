@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class InfoUserController extends Controller
 {
@@ -14,6 +15,16 @@ class InfoUserController extends Controller
     public function create()
     {
         return view('laravel-examples/user-profile');
+    }
+
+    public function list_demande()
+    {
+        $demande = DB::table('demandes')
+            ->rightjoin('users', 'demandes.userId', '=', 'users.id')
+            ->select('users.nom','users.prenom','users.numero','users.email','users.adresse','demandes.type_demande','demandes.fichier','demandes.statut','demandes.commentaire','demandes.created_at' )
+            ->get();
+        return view('dashboard', ['demande'=>$demande]);
+
     }
 
     public function store(Request $request)
@@ -31,17 +42,17 @@ class InfoUserController extends Controller
             if(env('IS_DEMO') && Auth::user()->id == 1)
             {
                 return redirect()->back()->withErrors(['msg2' => 'You are in a demo version, you can\'t change the email address.']);
-                
+
             }
-            
+
         }
         else{
             $attribute = request()->validate([
                 'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::user()->id)],
             ]);
         }
-        
-        
+
+
         User::where('id',Auth::user()->id)
         ->update([
             'name'    => $attributes['name'],
