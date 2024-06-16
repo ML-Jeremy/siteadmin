@@ -3,7 +3,7 @@
 @section('content')
 
   <div class="row">
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    {{-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
@@ -46,8 +46,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    </div> --}}
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
@@ -69,7 +69,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-sm-6">
+    <div class="col-xl-4 col-sm-6">
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
@@ -254,7 +254,7 @@
               <h6>Projets</h6>
               <p class="text-sm mb-0">
                 <i class="fa fa-check text-info" aria-hidden="true"></i>
-                <span class="font-weight-bold ms-1">30 réalisés</span> ce mois
+                <span class="font-weight-bold ms-1">{{ $projets }} réalisés</span> ce mois
               </p>
             </div>
             <div class="col-lg-6 col-5 my-auto text-end">
@@ -276,29 +276,27 @@
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Entreprises/Particuliers</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type de projet</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Projet</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Avancement</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                  <th class="font-weight-bolder ">Entreprises/Particuliers</th>
+                  <th class="font-weight-bolder  ps-2">Type de projet</th>
+                  <th class="font-weight-bolder ">Projet</th>
+                  <th class="font-weight-bolder ">Statut</th>
+                  <th class="font-weight-bolder ">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ( $demande as $demandes )
                 <tr>
-                    <td>
+                    <td class="text-sm">
                       {{ $demandes->nom }} {{ $demandes->prenom }}
                     </td>
-                    <td>
-                        @if ( $demandes->type_demande == 1 )
-                          <span></span>
-                        @endif
+                    <td class="text-sm">
+                        {{ $demandes->libelle }}
                     </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="text-xs font-weight-bold"> $14,000 </span>
+                    <td class=" text-sm">
+                        <i class="fa fa-file-pdf text-lg " aria-hidden="true" style="color: red;"></i>
                     </td>
-                    <td class="align-middle">
-                      <div class="progress-wrapper w-75 mx-auto">
+                    <td class="align-middle text-sm justify-content-center">
+                      {{-- <div class="progress-wrapper w-75 mx-auto">
                         <div class="progress-info">
                           <div class="progress-percentage">
                             <span class="text-xs font-weight-bold">60%</span>
@@ -307,7 +305,14 @@
                         <div class="progress">
                           <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                      </div>
+                      </div> --}}
+                      En cours...
+                    </td>
+                    <td class="align-middle text-sm d-flex offset-[1.5]">
+                        <a href="#"><i class="fa fa-check-circle" style="color: green; font-size: 20px;"></i></a>&nbsp;&nbsp;
+                        <a href="modif_demande{{ $demandes->id }}"><i class="fa fa-edit" style="color: rgb(153, 20, 206); font-size: 20px;"></i></a>&nbsp;&nbsp;
+                        <a href="#"><i class="fa fa-trash" style="color: red; font-size: 20px;"></i></a>&nbsp;&nbsp;
+                        <a href="#" class="btn btn-primary">Détail</a>
                     </td>
                   </tr>
                 @endforeach

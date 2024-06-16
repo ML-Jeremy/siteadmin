@@ -4,14 +4,14 @@
 
 <div>
     <div class="container-fluid">
-        <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+        <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
             <span class="mask bg-gradient-primary opacity-6"></span>
         </div>
         <div class="card card-body blur shadow-blur mx-4 mt-n6">
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="assets/img/bruce-mars.jpg" alt="..." class="w-100 border-radius-lg shadow-sm">
+                        <img src="../assets/img/bruce-mars.jpg" alt="..." class="w-100 border-radius-lg shadow-sm">
                         <a href="javascript:;" class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
                             <i class="fa fa-pen top-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Image"></i>
                         </a>
@@ -103,7 +103,7 @@
                 <h6 class="mb-0">{{ __('Profile Information') }}</h6>
             </div>
             <div class="card-body pt-4 p-3">
-                <form action="user-profile" method="POST" role="form text-left">
+                <form action="/user-profile" method="POST" role="form text-left">
                     @csrf
                     @if($errors->any())
                         <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
