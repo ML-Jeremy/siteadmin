@@ -12,7 +12,7 @@ class Demande extends Model
     protected $fillable =[
         'userId',
         'type_demande',
-        'fichier',
+        'projet',
         'statut',
         'commentaire',
         'created_at',

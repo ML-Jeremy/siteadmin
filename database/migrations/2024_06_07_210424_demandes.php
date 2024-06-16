@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('userId');
             $table->string('type_demande');
             $table->string('fichier')->nullable();
+            $table->string('projet')->nullable();
             $table->string('statut')->default('0');
             $table->double('prix')->nullable();
             $table->string('commentaire');
