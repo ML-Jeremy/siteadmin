@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Demande;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class InfoUserController extends Controller
 {
@@ -20,11 +23,30 @@ class InfoUserController extends Controller
     public function list_demande()
     {
         $demande = DB::table('demandes')
-            ->rightjoin('users', 'demandes.userId', '=', 'users.id')
-            ->select('users.nom','users.prenom','users.numero','users.email','users.adresse','demandes.type_demande','demandes.fichier','demandes.statut','demandes.commentaire','demandes.created_at' )
+            ->join('users', 'demandes.userId', '=', 'users.id')
+            ->join('services', 'demandes.type_demande', '=', 'services.id')
+            ->select('users.nom','users.prenom','users.numero','users.email','demandes.id','users.adresse','demandes.type_demande','demandes.projet','demandes.rendu_projet','demandes.statut','demandes.commentaire','demandes.created_at','services.libelle' )
             ->get();
-        return view('dashboard', ['demande'=>$demande]);
+        $dateLimite = Carbon::now()->subDays(30);
+        $projets = Demande::where('created_at', '>=', $dateLimite)->count();
+        return view('dashboard', ['demande'=>$demande,'projets'=>$projets]);
 
+    }
+
+    public function edit(string $id)
+    {
+         $model=Demande::find($id);
+
+       return view('modif-demande',['model'=>$model]);
+    }
+
+    public function update(Request $request)
+    {
+        $demande_modif=Demande::find($request->input('id_demande'));
+        $demande_modif->prix=$request->input('prix');
+        $demande_modif->save();
+
+        return Redirect::to('/dashboard');
     }
 
     public function store(Request $request)
