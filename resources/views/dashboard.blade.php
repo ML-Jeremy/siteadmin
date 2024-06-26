@@ -280,6 +280,7 @@
                   <th class="font-weight-bolder  ps-2">Type de projet</th>
                   <th class="font-weight-bolder ">Projet</th>
                   <th class="font-weight-bolder ">Statut</th>
+                  <th class="font-weight-bolder ">Prix</th>
                   <th class="font-weight-bolder ">Actions</th>
                 </tr>
               </thead>
@@ -308,11 +309,12 @@
                       </div> --}}
                       En cours...
                     </td>
+                    <td>{{ $demandes->prix }}</td>
                     <td class="align-middle text-sm d-flex offset-[1.5]">
                         <a href="#"><i class="fa fa-check-circle" style="color: green; font-size: 20px;"></i></a>&nbsp;&nbsp;
                         <a href="modif_demande{{ $demandes->id }}"><i class="fa fa-edit" style="color: rgb(153, 20, 206); font-size: 20px;"></i></a>&nbsp;&nbsp;
                         <a href="#"><i class="fa fa-trash" style="color: red; font-size: 20px;"></i></a>&nbsp;&nbsp;
-                        <a href="#" class="btn btn-primary">Détail</a>
+                        {{-- <a href="#" class="btn btn-primary">Détail</a> --}}
                     </td>
                   </tr>
                 @endforeach

@@ -43,12 +43,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('user-management', function () {
 		return view('laravel-examples/user-management');
 	})->name('user-management');
-	
+
 	Route::get('/demandes', [DemandeController::class, 'index'])->name('demandes.index');
-	Route::get('/demandes/creation', [DemandeController::class, 'create'])->name('demandes.creation');
+	Route::get('/creation', [DemandeController::class, 'create'])->name('demandes.creation');
 	Route::post('/demandes', [DemandeController::class, 'store'])->name('demandes.store');
 	Route::get('/demandes/{demande}/destroy', [DemandeController::class, 'destroy'])->name('demandes.destroy');
-	
+
 
 
 	Route::get('tables', function () {
@@ -69,7 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	Route::get('modif_demande{id}',[InfoUserController::class, 'edit']);
-    Route::post('modif',[InfoUserController::class, 'update']);
+    Route::post('modif',[InfoUserController::class, 'updatePrice']);
     Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']);

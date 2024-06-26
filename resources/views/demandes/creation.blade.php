@@ -1,4 +1,4 @@
-@extends('layouts.user_type.auth')
+@extends('simple-user.user_type.auth')
 
 @section('content')
 
@@ -9,7 +9,7 @@
                 <h6 class="mb-0">{{ __('Demande') }}</h6>
             </div>
             <div class="card-body pt-4 p-3">
-                <form action="{{route('demandes.store')}}" method="POST" role="form text-left">
+                <form action="{{route('demandes.store')}}" method="POST" role="form text-left" enctype="multipart/form-data" >
                     @csrf
                     @method('post')
                     @if($errors->any())
@@ -43,9 +43,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fichier-demande" class="form-control-label">{{ __('Fichier') }}</label>
-                                <div class="@error('fichier')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="" type="file" accept=".txt" id="demande-fichier" name="fichier">
-
+                                <div class="@error('projet')border border-danger rounded-3 @enderror">
+                                    <input class="form-control" value="" type="file"  id="demande-fichier" name="projet">
                                 </div>
                             </div>
                         </div>

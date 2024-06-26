@@ -21,15 +21,19 @@ class DemandeController extends Controller
     public function create() {
         return view('demandes.creation');
     }
-    
+
     public function store(Request $request) {
         $data = $request->validate([
             'type_demande' => ['required', 'max:30'],
-            'fichier' => ['file','nullable'],
+            'projet' => ['file','nullable','mimes:pdf,txt,png,jpg,svg','max:2048'],
             'commentaire'=> ['required','max:180'],
         ]);
 
+        $file_name = time() . '.' . request()->projet->getClientOriginalExtension();
+        request()->projet->move(public_path('images'), $file_name);
+
         $data['userId'] = auth()->id();
+        $data['projet'] = $file_name;
 
         $newDemande = Demande::create($data);
 
