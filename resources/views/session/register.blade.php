@@ -22,7 +22,7 @@
               <h5>S'inscrire</h5>
             </div>
             <div class="card-body">
-              <form role="form text-left" method="POST" action="/register">
+              <form role="form text-left" method="POST" action="register">
                 @csrf
                 <div class="mb-3 d-flex row">
                     <div class="col-6">
