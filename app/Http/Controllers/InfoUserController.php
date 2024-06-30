@@ -33,6 +33,12 @@ class InfoUserController extends Controller
 
     }
 
+    public function list_client()
+    {
+        $client = User::where('users.type','!=','1')->get();
+        return view('laravel-examples.user-management',['client'=>$client]);
+    }
+
     public function edit(string $id)
     {
          $model=Demande::find($id);
@@ -40,11 +46,85 @@ class InfoUserController extends Controller
        return view('modif-demande',['model'=>$model]);
     }
 
+    public function editdemande(string $id)
+    {
+         $model=Demande::find($id);
+
+       return view('rendre-demande',['model'=>$model]);
+    }
+
+
+
     public function updatePrice(Request $request)
     {
         $demande_modif=Demande::find($request->input('id_demande'));
         $demande_modif->prix=$request->input('prix');
         $demande_modif->save();
+
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        $headers .= "From: La plume entrepreneue". "\r\n";
+
+
+        $message = '<html lang="en">' .
+            '<head>' .
+            '<meta charset="UTF-8">' .
+            '<meta name="viewport" content="width=device-width, initial-scale=1.0">' .
+            '<title>Facturation de projet</title>' .
+            '</head>' .
+            '<body>' .
+            '<h1>Confirmation  de votre projet</h1>' .
+            '<p>Bonjour '. Auth::user()->nom .',<br><br>Nous avons le plaisir de vous annoncer que votre projet a été pris en compte.Veuillez vous connecter à votre espace personnel pour confirmer votre commande.<br><br><br>Cordialement,<br>La plume entrepreneuse.</p>' .
+            '</body>' .
+            '</html>';
+
+
+       $sender="contact@laplumeentrepreneuse.fr";
+       $email=Auth::user()->email;
+        if (mail($email, $sender, $message,$headers)) {
+
+        }
+
+        return Redirect(route('dashboard'));
+    }
+
+    public function updateDemande(Request $request)
+    {
+        $request->validate([
+            'rendu_projet' => ['file','nullable','mimes:pdf,txt,png,jpg,svg','max:2048'],
+        ]);
+
+        $file_name = time() . '.' . request()->rendu_projet->getClientOriginalExtension();
+        request()->rendu_projet->move(public_path('images'), $file_name);
+        $demande_modif=Demande::find($request->input('id_demande'));
+        $demande_modif->rendu_projet=$file_name;
+        $demande_modif->statut=3;
+        $demande_modif->save();
+
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        $headers .= "From: La plume entrepreneue". "\r\n";
+
+
+        $message = '<html lang="en">' .
+            '<head>' .
+            '<meta charset="UTF-8">' .
+            '<meta name="viewport" content="width=device-width, initial-scale=1.0">' .
+            '<title>Rendu de projet</title>' .
+            '</head>' .
+            '<body>' .
+            '<p>Bonjour '. Auth::user()->nom .',<br><br>Nous avons le plaisir de vous annoncer que votre projet a été finaliser.Veuillez trouvez ci-joint votre projet ou vous connecter à votre espace personnel pour le télécharger.<br><br><br>Cordialement,<br>La plume entrepreneuse.</p>' .
+            '</body>' .
+            '</html>';
+
+
+       $sender="contact@laplumeentrepreneuse.fr";
+       $email=Auth::user()->email;
+        if (mail($email, $sender, $message,$headers)) {
+
+        }
 
         return Redirect(route('dashboard'));
     }

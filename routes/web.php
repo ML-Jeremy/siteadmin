@@ -40,14 +40,13 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('rtl');
 	})->name('rtl');
 
-	Route::get('user-management', function () {
-		return view('laravel-examples/user-management');
-	})->name('user-management');
 
 	Route::get('/demandes', [DemandeController::class, 'index'])->name('demandes.index');
 	Route::get('/creation', [DemandeController::class, 'create'])->name('demandes.creation');
 	Route::post('/demandes', [DemandeController::class, 'store'])->name('demandes.store');
 	Route::get('/demandes/{demande}/destroy', [DemandeController::class, 'destroy'])->name('demandes.destroy');
+    Route::get('/demandes/{demande}/accept', [DemandeController::class, 'acceptPrice'])->name('demandes.accept');
+    Route::get('/demandes/{demande}/refuse', [DemandeController::class, 'refusePrice'])->name('demandes.refuse');
 
 
 
@@ -69,9 +68,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	Route::get('modif_demande{id}',[InfoUserController::class, 'edit']);
+    Route::get('rendre_demande{id}',[InfoUserController::class, 'editdemande']);
     Route::post('modif',[InfoUserController::class, 'updatePrice']);
+    Route::post('rendre',[InfoUserController::class, 'updateDemande']);
     Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);
+    Route::get('/user-management', [InfoUserController::class, 'list_client']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']);
     Route::get('/login', function () {
 		return view('dashboard');

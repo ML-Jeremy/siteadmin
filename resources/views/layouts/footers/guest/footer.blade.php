@@ -3,16 +3,16 @@
     <div class="container">
       <div class="row">
       <div class="col-lg-8 mb-4 mx-auto text-center">
-          <a href="#" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+          <a href="index.php" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
               Accueil
           </a>
-          <a href="#" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+          <a href="prestation.php" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
               Prestation
           </a>
-          <a href="#" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+          <a href="tarifs.php" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
               Tarifs
           </a>
-          <a href="#" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+          <a href="contact.php" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
               Contacts
           </a>
       </div>

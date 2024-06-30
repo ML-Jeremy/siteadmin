@@ -1,4 +1,4 @@
-@extends('simple-user.user_type.auth')
+@extends('layouts.user_type.auth')
 
 @section('content')
 
@@ -9,7 +9,7 @@
                 <h6 class="mb-0">{{ __('Demande') }}</h6>
             </div>
             <div class="card-body pt-4 p-3">
-                <form action="{{route('demandes.store')}}" method="POST" role="form text-left" enctype="multipart/form-data" >
+                <form action="rendre" method="POST" role="form text-left" enctype="multipart/form-data">
                     @csrf
                     @method('post')
                     @if($errors->any())
@@ -30,39 +30,22 @@
                             </button>
                         </div>
                     @endif
+                    <input type="hidden" name="id_demande" value="{{ $model->id }}">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="type-demande" class="form-control-label">{{ __('Type de demande') }}</label>
+                                <label for="type-demande" class="form-control-label">{{ __(' Rendre le projet') }}</label>
                                 <div class="@error('type')border border-danger rounded-3 @enderror">
-                                    <select class="form-control" value="" type="select" placeholder="" id="type-demande" name="type_demande" required>
-                                        <option value="">Quelle est votre demande</option>
-                                        @foreach ($services as $service )
-                                        <option value="{{ $service->id }}">{{ $service->libelle }}</option>
-                                        @endforeach
-
-                                    </select>
+                                    <input class="form-control" value="" type="file" placeholder="Choisir un fichier" id="" name="rendu_projet">
 
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="fichier-demande" class="form-control-label">{{ __('Fichier') }}</label>
-                                <div class="@error('projet')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="" type="file"  id="demande-fichier" name="projet" required>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
-                    <div class="form-group">
-                        <label for="about">{{ 'Commentaire' }}</label>
-                        <div class="@error('demande.commentaire')border border-danger rounded-3 @enderror">
-                            <textarea class="form-control" id="about" rows="3" placeholder="Un commentaire sur votre demande" name="commentaire" required></textarea>
-                        </div>
-                    </div>
+
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Envoyer la demande' }}</button>
+                        <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Soumettre' }}</button>
                     </div>
                 </form>
 

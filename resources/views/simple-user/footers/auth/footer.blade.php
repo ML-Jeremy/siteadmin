@@ -12,16 +12,16 @@
             <div class="col-lg-8">
                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-muted" target="_blank">Accueil</a>
+                        <a href="index.php" class="nav-link text-muted" target="_blank">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-muted" target="_blank">Prestations</a>
+                        <a href="prestattion.php" class="nav-link text-muted" target="_blank">Prestations</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-muted" target="_blank">Tarifs</a>
+                        <a href="tarifs.php" class="nav-link text-muted" target="_blank">Tarifs</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-muted" target="_blank">Contact</a>
+                        <a href="contact.php" class="nav-link text-muted" target="_blank">Contact</a>
                     </li>
                 </ul>
             </div>
